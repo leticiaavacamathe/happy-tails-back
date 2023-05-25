@@ -1,6 +1,6 @@
-import { type NextFunction, type Request, type Response } from "express";
+import { type Request, type Response } from "express";
 
-const pingController = (req: Request, res: Response, _next: NextFunction) => {
+const pingController = (req: Request, res: Response) => {
   res.status(200).json({ message: "pong 🏓" });
 };
 
