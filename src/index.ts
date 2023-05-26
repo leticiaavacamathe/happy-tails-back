@@ -1,7 +1,7 @@
 import "./loadEnvironment.js";
 import createDebug from "debug";
 import chalk from "chalk";
-import app from "./server/index.js";
+import app from "./server/app.js";
 import connectToDatabase from "./database/connectToDatabase.js";
 
 export const debug = createDebug("happy-tails-api:root");
