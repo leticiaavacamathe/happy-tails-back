@@ -1,5 +1,7 @@
 interface PathStructure {
-  pingController: string;
+  ping: string;
+  user: string;
+  login: string;
 }
 
 export default PathStructure;

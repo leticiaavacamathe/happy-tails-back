@@ -6,14 +6,14 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
+
   password: {
     type: String,
     required: true,
-    min: 3,
   },
+
   name: {
     type: String,
-    required: true,
   },
 });
 

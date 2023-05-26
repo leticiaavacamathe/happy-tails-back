@@ -4,7 +4,8 @@ import morgan from "morgan";
 import notFoundError from "./middlewares/notFoundErrorMiddleware/notFoundErrorMiddleware.js";
 import generalError from "./middlewares/generalErrorMiddleware/generalErrorMiddleware.js";
 import pingController from "./controllers/ping/pingController.js";
-import path from "./paths/paths.js";
+import paths from "./utils/paths.js";
+import userRouter from "./routers/user/userRouter.js";
 
 const allowedOrigins = process.env.ALLOWED_ORIGINS;
 
@@ -22,7 +23,9 @@ app.use(morgan("dev"));
 
 app.use(express.json());
 
-app.get(path.pingController, pingController);
+app.get(paths.ping, pingController);
+
+app.use(paths.user, userRouter);
 
 app.use(notFoundError);
 
