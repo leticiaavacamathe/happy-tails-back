@@ -1,4 +1,4 @@
-import { Joi } from "express-validation";
+import { Joi, validate } from "express-validation";
 import { type UserCredentialsStructure } from "../server/types";
 
 const loginSchema = {
@@ -8,4 +8,4 @@ const loginSchema = {
   }),
 };
 
-export default loginSchema;
+export const loginValidation = validate(loginSchema, {}, { abortEarly: false });
