@@ -10,3 +10,7 @@ export type UserCredentialsRequest = Request<
   Record<string, unknown>,
   UserCredentialsStructure
 >;
+
+export type UserDatabaseStructure = {
+  _id: string;
+} & UserCredentialsStructure;
