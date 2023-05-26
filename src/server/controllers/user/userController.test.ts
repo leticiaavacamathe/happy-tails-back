@@ -6,7 +6,7 @@ import User from "../../../database/models/User.js";
 import {
   type UserCredentialsStructure,
   type UserCredentialsRequest,
-  type UserDatabaseStructure,
+  type UserDataStructure,
 } from "../../types";
 import loginUser from "./userController.js";
 import CustomError from "../../../CustomError/CustomError.js";
@@ -28,7 +28,7 @@ describe("Given a loginUser controller", () => {
 
   const next = jest.fn();
 
-  const mockUserCredentials: UserDatabaseStructure = {
+  const mockUserCredentials: UserDataStructure = {
     _id: new Types.ObjectId().toString(),
     username: "Jhon",
     password: "jhon",
