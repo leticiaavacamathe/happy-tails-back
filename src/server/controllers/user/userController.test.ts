@@ -9,6 +9,7 @@ import {
   type UserDatabaseStructure,
 } from "../../types";
 import loginUser from "./userController.js";
+import CustomError from "../../../CustomError/CustomError.js";
 
 describe("Given a loginUser controller", () => {
   const userCredentials: UserCredentialsStructure = {
@@ -64,6 +65,26 @@ describe("Given a loginUser controller", () => {
       );
 
       expect(res.json).toHaveBeenCalledWith({ token: mockToken });
+    });
+  });
+
+  describe("When it receives a request with an invalid username or password", () => {
+    test("Then it should call the next function with a Custom Error with status code 401 and the message 'Wrong credentials'", async () => {
+      const error = new CustomError(401, "Wrong credentials");
+
+      User.findOne = jest.fn().mockReturnValue({
+        exec: jest.fn().mockResolvedValue(undefined),
+      });
+
+      bcrypt.compare = jest.fn().mockResolvedValue(false);
+
+      await loginUser(
+        req as UserCredentialsRequest,
+        res as Response,
+        next as NextFunction
+      );
+
+      expect(next).toHaveBeenCalledWith(error);
     });
   });
 });
