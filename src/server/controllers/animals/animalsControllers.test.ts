@@ -1,8 +1,12 @@
-import { type NextFunction, type Response } from "express";
+import { type NextFunction, type Response, type Request } from "express";
 import Animal from "../../../database/models/Animal.js";
 import { animalsMocks } from "../../../mocks/animalMocks.js";
 import { getAnimals } from "./animalsControllers.js";
 import { type CustomRequest } from "../../types.js";
+
+beforeEach(() => {
+  jest.clearAllMocks();
+});
 
 describe("Given a getAnimals controller", () => {
   const req = {};
@@ -30,7 +34,7 @@ describe("Given a getAnimals controller", () => {
       expect(res.status).toHaveBeenCalledWith(expectedStatus);
     });
 
-    test("Then it should call the response json method with a list of two plants", async () => {
+    test("Then it should call the response json method with a list of two animals", async () => {
       const expectedAnimals = animalsMocks;
 
       await getAnimals(
@@ -40,6 +44,21 @@ describe("Given a getAnimals controller", () => {
       );
 
       expect(res.json).toHaveBeenCalledWith({ animals: expectedAnimals });
+    });
+  });
+
+  describe("When it rejects and receives a next function", () => {
+    test("Then it should call the next function with the error 'Database error connection'", async () => {
+      const expectedError = new Error("Database error connection");
+
+      Animal.find = jest.fn().mockReturnValue({
+        limit: jest.fn().mockReturnThis(),
+        exec: jest.fn().mockRejectedValue(expectedError),
+      });
+
+      await getAnimals(req as Request, res as Response, next as NextFunction);
+
+      expect(next).toHaveBeenCalledWith(expectedError);
     });
   });
 });
