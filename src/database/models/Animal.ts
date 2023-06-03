@@ -14,19 +14,23 @@ const animalSchema = new Schema({
     type: String,
     required: true,
   },
-  breed: {
+  type: {
     type: String,
     required: true,
   },
-  vaccinated: {
-    type: Boolean,
+  city: {
+    type: String,
     required: true,
   },
-  dewormed: {
-    type: Boolean,
+  sex: {
+    type: String,
     required: true,
   },
-  history: {
+  weight: {
+    type: Number,
+    required: true,
+  },
+  description: {
     type: String,
     required: true,
   },

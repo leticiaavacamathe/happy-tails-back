@@ -7,7 +7,7 @@ import pingController from "./controllers/ping/pingController.js";
 import paths from "./utils/paths.js";
 import userRouter from "./routers/user/userRouter.js";
 
-const allowedOrigins = process.env.ALLOWED_ORIGINS;
+const allowedOrigins = process.env.ALLOWED_ORIGINS!.split(" ");
 
 const options: cors.CorsOptions = {
   origin: allowedOrigins,
