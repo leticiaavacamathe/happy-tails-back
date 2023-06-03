@@ -19,3 +19,20 @@ export type UserDataStructure = {
 export type UserDatabaseStructure = {
   _id: Types.ObjectId;
 } & UserCredentialsStructure;
+
+export interface AnimalStructure {
+  _id: Types.ObjectId;
+  name: string;
+  image: string;
+  type: string;
+  age: number;
+  city: string;
+  sex: string;
+  weight: number;
+  description: string;
+  user: Types.ObjectId;
+}
+
+export interface CustomRequest extends Request {
+  userId: string;
+}
