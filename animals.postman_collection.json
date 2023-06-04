@@ -1,0 +1,60 @@
+{
+  "info": {
+    "_postman_id": "71eb6b7a-d170-4208-9862-9901eff6af24",
+    "name": "final-project",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "http://localhost:4000/user/login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:4000/user/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["user", "login"]
+        },
+        "description": "endpoint user login"
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:4000/animals",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDcwODQ3NmNiOTcxYzEwMTBhMjA0NjQiLCJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODU4OTU2MTAsImV4cCI6MTY4NjUwMDQxMH0.JV2uYB0jZtm7ibd18Mnv2SkSmEeD9w6i0QW0rXsiGiw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4000/animals",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["animals"]
+        },
+        "description": "Endpoint getAnimals "
+      },
+      "response": []
+    }
+  ]
+}
