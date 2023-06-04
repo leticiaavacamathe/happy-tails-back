@@ -5,7 +5,7 @@ export const animalsMocks: AnimalStructure[] = [
   {
     _id: new Types.ObjectId(),
     name: "Max",
-    image: "http://imageofmax.png",
+    image: "https://imageofmax.png",
     type: "dog",
     age: 5,
     city: "Barcelona",
@@ -17,7 +17,7 @@ export const animalsMocks: AnimalStructure[] = [
   {
     _id: new Types.ObjectId(),
     name: "Bruno",
-    image: "http://imageofbruno.png",
+    image: "https://imageofbruno.png",
     type: "dog",
     age: 2,
     city: "Barcelona",
