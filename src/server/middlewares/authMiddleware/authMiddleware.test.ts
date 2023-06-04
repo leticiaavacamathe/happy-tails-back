@@ -4,6 +4,10 @@ import { type NextFunction, type Request, type Response } from "express";
 import { auth } from "./authMiddleware";
 import CustomError from "../../../CustomError/CustomError";
 
+beforeEach(() => {
+  jest.clearAllMocks();
+});
+
 describe("Given an auth middleware", () => {
   const token = "gfd7gf788ssdf78ds";
 
@@ -34,6 +38,20 @@ describe("Given an auth middleware", () => {
       jwt.verify = jest.fn().mockImplementation(() => {
         throw expectedError;
       });
+
+      auth(req as CustomRequest, res as Response, next);
+
+      expect(next).toHaveBeenCalledWith(expectedError);
+    });
+  });
+
+  describe("When it receives an authorization header without bearer and with a next function", () => {
+    test("Then it should call the received next function with a status code 401 and a message 'Missing token'", () => {
+      const req: Pick<Request, "header"> = {
+        header: jest.fn().mockReturnValue(token),
+      };
+
+      const expectedError = new CustomError(401, "Missing token");
 
       auth(req as CustomRequest, res as Response, next);
 
