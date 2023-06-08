@@ -29,9 +29,9 @@ export const deleteAnimal = async (
   next: NextFunction
 ) => {
   try {
-    const { id } = req.params;
+    const { idAnimal } = req.params;
 
-    const removedAnimal = await Animal.findByIdAndDelete(id).exec();
+    const removedAnimal = await Animal.findByIdAndDelete(idAnimal).exec();
 
     if (!removedAnimal) {
       const error = new CustomError(404, "Animal not found");

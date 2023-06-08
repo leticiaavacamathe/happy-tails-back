@@ -1,8 +1,8 @@
 import { type NextFunction, type Response, type Request } from "express";
-import Animal from "../../../database/models/Animal.js";
-import { animalsMocks } from "../../../mocks/animalMocks.js";
-import { getAnimals } from "./animalsControllers.js";
-import { type CustomRequest } from "../../types.js";
+import Animal from "../../../../database/models/Animal.js";
+import { animalsMocks } from "../../../../mocks/animalMocks.js";
+import { getAnimals } from "../animalsControllers.js";
+import { type CustomRequest } from "../../../types.js";
 
 beforeEach(() => {
   jest.clearAllMocks();
