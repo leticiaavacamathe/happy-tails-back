@@ -8,6 +8,6 @@ const animalsRouter = Router();
 
 animalsRouter.get("/", getAnimals);
 
-animalsRouter.delete("/:id", deleteAnimal);
+animalsRouter.delete("/:idAnimal", deleteAnimal);
 
 export default animalsRouter;
