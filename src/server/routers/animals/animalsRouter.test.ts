@@ -11,6 +11,10 @@ import { tokenMock } from "../../../mocks/userMocks.js";
 
 let server: MongoMemoryServer;
 
+beforeEach(() => {
+  jest.clearAllMocks();
+});
+
 beforeAll(async () => {
   server = await MongoMemoryServer.create();
   await connectToDatabase(server.getUri());
@@ -48,6 +52,28 @@ describe("Given a GET '/animals' endpoint", () => {
       const expectedStatusCode = 401;
 
       await request(app).get(paths.animals).expect(expectedStatusCode);
+    });
+  });
+});
+
+describe("Given a DELETE '/:idAnimal' endpoint", () => {
+  beforeEach(async () => {
+    await Animal.create(animalsMocks);
+  });
+
+  describe("When it receives a request with a valid id", () => {
+    test("Then it should return the response method status with code 200 and the response method json with the message 'Animal deleted'", async () => {
+      const expectedStatus = 200;
+      const expectedMessage = "Animal removed";
+
+      const animal = await Animal.find().exec();
+
+      const response = await request(app)
+        .delete(`/animals/${animal[0]._id.toString()}`)
+        .set("Authorization", `Bearer ${tokenMock}`)
+        .expect(expectedStatus);
+
+      expect(response.body.message).toBe(expectedMessage);
     });
   });
 });
