@@ -35,4 +35,5 @@ export interface AnimalStructure {
 
 export interface CustomRequest extends Request {
   userId: string;
+  body: AnimalStructure;
 }
