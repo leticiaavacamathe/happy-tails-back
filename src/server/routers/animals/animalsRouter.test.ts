@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import connectToDatabase from "../../../database/connectToDatabase.js";
 import Animal from "../../../database/models/Animal.js";
-import { animalsMocks } from "../../../mocks/animalMocks.js";
+import { animalsMocks, newAnimalMock } from "../../../mocks/animalMocks.js";
 import app from "../../app.js";
 import paths from "../../utils/paths.js";
 import { tokenMock } from "../../../mocks/userMocks.js";
@@ -28,6 +28,9 @@ afterAll(async () => {
 afterEach(async () => {
   await Animal.deleteMany();
 });
+
+const token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDcwODQ3NmNiOTcxYzEwMTBhMjA0NjQiLCJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODY0MjAyODUsImV4cCI6MTY4NzAyNTA4NX0.y9fzD1653TQOGcjCUroE7RcsNt20xvRHejWVKckqzo0";
 
 describe("Given a GET '/animals' endpoint", () => {
   beforeEach(async () => {
@@ -74,6 +77,23 @@ describe("Given a DELETE '/:idAnimal' endpoint", () => {
         .expect(expectedStatus);
 
       expect(response.body.message).toBe(expectedMessage);
+    });
+  });
+});
+
+describe("Given a POST '/create' endpoint", () => {
+  describe("When it receives a request with an animal valid data", () => {
+    test("Then it should return the response method status with code 201 and a new animal", async () => {
+      const expectedStatus = 201;
+      const expectedProperty = "animal";
+
+      const response = await request(app)
+        .post("/animals/add")
+        .set("Authorization", `Bearer ${token}`)
+        .send(newAnimalMock)
+        .expect(expectedStatus);
+
+      expect(response.body).toHaveProperty(expectedProperty);
     });
   });
 });

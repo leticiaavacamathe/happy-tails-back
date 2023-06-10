@@ -3,6 +3,7 @@ import { type NextFunction, type Request, type Response } from "express";
 import Animal from "../../../database/models/Animal.js";
 import { type CustomRequest } from "../../types.js";
 import CustomError from "../../../CustomError/CustomError.js";
+import { Types } from "mongoose";
 
 const debug = createDebug(
   "happy-tails-api:server:controllers:animals:animalsControllers.js"
@@ -40,6 +41,30 @@ export const deleteAnimal = async (
     }
 
     res.status(200).json({ message: "Animal removed" });
+  } catch (error: unknown) {
+    next(error);
+  }
+};
+
+export const addAnimal = async (
+  req: CustomRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  const { userId, body } = req;
+  try {
+    const newAnimal = await Animal.create({
+      ...body,
+      user: new Types.ObjectId(userId),
+    });
+
+    if (!newAnimal) {
+      const error = new CustomError(400, "Error Animal not added");
+
+      throw error;
+    }
+
+    res.status(201).json({ animal: newAnimal });
   } catch (error: unknown) {
     next(error);
   }
