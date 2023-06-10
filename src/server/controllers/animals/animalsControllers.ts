@@ -64,7 +64,7 @@ export const addAnimal = async (
       throw error;
     }
 
-    res.status(201).json({ newAnimal });
+    res.status(201).json({ animal: newAnimal });
   } catch (error: unknown) {
     next(error);
   }

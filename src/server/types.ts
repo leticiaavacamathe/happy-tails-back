@@ -20,7 +20,7 @@ export type UserDatabaseStructure = {
   _id: Types.ObjectId;
 } & UserCredentialsStructure;
 
-export interface AnimalStructure {
+export interface AnimalDatabaseStructure {
   _id: Types.ObjectId;
   name: string;
   image: string;
@@ -35,5 +35,19 @@ export interface AnimalStructure {
 
 export interface CustomRequest extends Request {
   userId: string;
+  params: {
+    idAnimal: string;
+  };
   body: AnimalStructure;
+}
+
+export interface AnimalStructure {
+  name: string;
+  image: string;
+  type: string;
+  age: number;
+  city: string;
+  sex: string;
+  weight: number;
+  description: string;
 }

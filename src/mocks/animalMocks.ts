@@ -1,7 +1,10 @@
 import { Types } from "mongoose";
-import { type AnimalStructure } from "../server/types";
+import {
+  type AnimalStructure,
+  type AnimalDatabaseStructure,
+} from "../server/types";
 
-export const animalsMocks: AnimalStructure[] = [
+export const animalsMocks: AnimalDatabaseStructure[] = [
   {
     _id: new Types.ObjectId(),
     name: "Max",
@@ -27,3 +30,14 @@ export const animalsMocks: AnimalStructure[] = [
     user: new Types.ObjectId("64708476cb971c1010a20464"),
   },
 ];
+
+export const newAnimalMock: AnimalStructure = {
+  name: "Sandy",
+  image: "https://imageofsandy.png",
+  type: "dog",
+  age: 7,
+  city: "Barcelona",
+  sex: "Male",
+  weight: 3,
+  description: "Sansy is a very sociable dog, he get well with children",
+};
