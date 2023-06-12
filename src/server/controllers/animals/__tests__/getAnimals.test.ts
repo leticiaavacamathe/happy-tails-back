@@ -18,6 +18,7 @@ describe("Given a getAnimals controller", () => {
 
   describe("When it recevies a request with a userId and a response", () => {
     Animal.find = jest.fn().mockReturnValue({
+      sort: jest.fn().mockReturnThis(),
       limit: jest.fn().mockReturnThis(),
       exec: jest.fn().mockResolvedValue(animalsMocks),
     });

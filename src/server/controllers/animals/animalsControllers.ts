@@ -15,7 +15,7 @@ export const getAnimals = async (
   next: NextFunction
 ) => {
   try {
-    const animals = await Animal.find().limit(10).exec();
+    const animals = await Animal.find().sort({ _id: -1 }).limit(10).exec();
     res.status(200).json({ animals });
   } catch (error) {
     error.message = "Database error connection";
