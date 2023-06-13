@@ -77,7 +77,7 @@ export const getAnimal = async (
 ) => {
   const { idAnimal } = req.params;
   try {
-    const animal = await Animal.findById({ _id: idAnimal }).exec();
+    const animal = await Animal.findById(idAnimal).exec();
 
     if (!animal) {
       const error = new CustomError(404, "Animal not found");
